@@ -1,0 +1,21 @@
+.create-task{
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    .form-group{
+        margin-bottom: 1rem;
+        h4{
+            margin: 0;
+        }
+    }
+    .buttons{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.text-error{
+    color: red;
+}

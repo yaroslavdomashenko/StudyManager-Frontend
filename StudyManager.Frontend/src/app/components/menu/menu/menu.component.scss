@@ -1,0 +1,43 @@
+.menu{
+    width: 280px;
+    height: 100vh;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    .menu-content{
+        .logo{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 0px;
+            border-bottom: solid 1px #EBEFF2;
+            margin-bottom: 1rem;
+            a{
+                font-size: 25px;
+                color: #109CF1;
+                text-decoration: none;
+            }
+        }
+        .loading{
+           margin-bottom: 1rem;
+        }
+        .profile{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            .profile-left{
+                margin-left: 1rem;
+            }
+            .prifile-right{
+                margin-left: 1rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .menu{
+        width: 100%;
+        height: auto;
+        padding-bottom: 1rem;
+    }
+}

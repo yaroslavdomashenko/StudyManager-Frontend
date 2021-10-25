@@ -1,0 +1,109 @@
+.notify{
+    position: relative;
+    .image-button{
+        position: relative;
+        cursor: pointer;
+        img{
+            height: 35px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        span{
+            position: absolute;
+            height: 25px;
+            width: 25px;
+            text-align: center;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            right: 0;
+        }
+    }
+
+    .notifications{
+        position: absolute;
+        background-color: white;
+        width: 350px;
+        max-height: 500px;
+        overflow: auto;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+        &::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #888; 
+        }
+        &::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+
+
+
+        .header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: solid 1px #EBEFF2;
+            .close{
+                cursor: pointer;
+            }
+            img{
+                height: 30px;
+                margin: 5px;
+            }
+            h4{
+                margin: 0 !important;
+            }
+        }
+        .footer{
+            margin: 7px;
+            text-align: center;
+            p{
+                margin: 0 !important;
+                color: black;
+                cursor: pointer;
+            }
+        }
+
+        .notify{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: solid 1px #EBEFF2;
+            .left{
+                margin-left: 25px;
+                .text{
+                    word-break: normal;
+                }
+                .date{
+                    p{
+                        font-size: 12px;
+                        color: gray;
+                        margin: 0!important;
+                    }
+                }
+            }
+            .right{
+                cursor: pointer;
+                img{
+                    height: 30px;
+                    margin: 5px;
+                }
+                &:hover{
+                    background-color: #EBEFF2;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .notifications{
+        width: screen;
+        transform: translate(-80%, 0%);
+    }
+}

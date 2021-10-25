@@ -1,0 +1,40 @@
+<div class="create-task" >
+    <div *ngIf="loading" class="loading loading-icon text-info" >
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status"></div>
+        </div>
+    </div>
+
+    <div *ngIf="!loading">
+        <h4>Create task</h4>
+        <form [formGroup]="createForm" (ngSubmit)="CreateTask()">
+            <div class="form-group">
+                <label for="titleInput">Title</label>
+                <input type="text" class="form-control" id="titleInput" placeholder="Title" formControlName="title">
+                <small class="form-text text-error" *ngIf="Form.title.errors?.required && Form.title.touched">Title is required</small>
+                <small class="form-text text-error" *ngIf="Form.title.errors?.minlength && Form.title.touched">Title must have at least 4 symbols</small>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" id="textInput" rows="3" placeholder="Text (not required)" formControlName="text">
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <h4><label for="dateInput">Deadline</label></h4>
+                <input type="date" id="dateInput" min="{{TodayDate}}" formControlName="date">
+                <p><small class="form-text text-error" *ngIf="Form.date.errors?.required && Form.date.touched">Deadline is required</small></p>      
+            </div>
+
+            <div class="form-group">
+                <h4>
+                    <label for="attachments">Attachments</label>
+                </h4>
+                <input type="file" class="form-control-file" id="attachments" #file multiple (change)="onFileSelected(file.files)">
+            </div>
+
+            <div class="buttons">
+                <button type="submit" class="btn btn-success" [disabled]="!createForm.valid">Create</button>
+            </div>
+        </form>
+    </div>
+</div>

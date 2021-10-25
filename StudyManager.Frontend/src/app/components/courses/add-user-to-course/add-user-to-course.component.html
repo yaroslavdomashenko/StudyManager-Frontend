@@ -1,0 +1,27 @@
+<div class="search">
+    <form [formGroup]="userForm" (ngSubmit)="AddUser()">
+
+        <div class="form">
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">@</div>
+                </div>
+                <input type="text" class="form-control"placeholder="Username" formControlName="login">
+                
+            </div>
+
+            <div class="form-check form-switch" *ngIf="userRole == 2">
+                <input class="form-check-input" type="checkbox" id="teacherCheckbox" formControlName="asTeacher">
+                <label class="form-check-label" for="teacherCheckbox">As a teacher</label>
+            </div>
+
+            <button type="submit" class="btn btn-success mb-2" [disabled]="!uForm.login.valid">Add</button>
+            <small class="form-text text-muted error" 
+                    *ngIf="uForm.login.errors?.minlength && uForm.login.touched"
+                >Login must have at least 5 characters
+            </small>
+        </div>
+
+    </form>
+</div>
+

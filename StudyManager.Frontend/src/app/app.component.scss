@@ -1,0 +1,14 @@
+main{
+    display: flex;
+}
+
+.content{
+    background-color: #E5E5E5;
+    width: 100%;  
+}
+
+@media screen and (max-width: 900px) {
+    main{
+        display: block;
+    }
+}

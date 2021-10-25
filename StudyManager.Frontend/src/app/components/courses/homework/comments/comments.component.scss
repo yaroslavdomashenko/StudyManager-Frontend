@@ -1,0 +1,72 @@
+.comments-box{
+    .comments{
+        margin-top: 1.5rem;
+        overflow: auto;
+        max-height: 350px;
+        h4{
+            margin: 0.25rem 0 !important;
+        }
+        .comment{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0rem;
+            &:hover{
+                background-color: #f1f1f1 !important;
+                border-radius: 0.5rem;
+            } 
+            .bi{
+                margin-right: 0.5rem;
+                cursor: pointer;
+            }
+            .left{
+                display: flex;
+                align-items: center;
+                img{
+                    height: 50px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                }
+                .info{
+                    margin-left: 0.5rem;
+                    .head{
+                        display: flex;
+                        align-items: center;
+                        .username{
+                            font-weight: bold;
+                        }
+                        .date{
+                            margin-left: 0.5rem !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .load-btn{
+        display: flex;
+        justify-content: center;
+    }
+    .comment-form{
+        margin-top: 1rem;
+        .form-group{
+            display: flex !important;
+            align-items: center;
+            button{
+                width: 150px;
+            }
+        }
+    }
+}
+
+.loading{
+    margin-top: 1.5rem;
+}
+
+p, h4{
+    margin: 0 !important;
+}
+
+.dropdown-menu{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

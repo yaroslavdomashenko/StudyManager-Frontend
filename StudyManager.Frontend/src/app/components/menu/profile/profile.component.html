@@ -1,0 +1,15 @@
+<div class="profile-content">
+    <div class="img">
+        <a [routerLink]="['users', Login]">
+            <img *ngIf="Avatar" src="{{serverUrl + Avatar}}">
+            <img *ngIf="!Avatar" src="{{serverUrl}}/files/avatar.png">
+        </a>
+    </div>
+    <div class="content">
+        <h3>{{Name}}</h3>
+        <div class="buttom">
+            <p>@{{Login}}</p>
+            <a routerLink="logout">Log out</a>
+        </div>
+    </div>
+</div>

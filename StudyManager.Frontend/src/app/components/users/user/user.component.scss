@@ -1,0 +1,110 @@
+.profile-content{
+    padding: 2rem;
+    .profile-header{
+        display: flex;
+        justify-content: center;
+        .left-header{
+            margin-right: 2rem;
+            .img{
+                padding: 20px;
+                background-color: white;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                border-radius: 0.5rem;
+                img{
+                    height: 200px;
+                    border-radius: 50%;
+                }
+            }
+            
+        }
+        .right-header{
+            width: 50%;
+            .title, .info{
+                padding: 20px;
+                background-color: white;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                border-radius: 0.5rem;
+                background-color: white;
+                margin-bottom: 1rem;
+            }
+            .courses{
+                .courses-title{
+                    padding: 10px;
+                    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                    border-radius: 0.5rem;
+                    background-color: white;
+                    margin-bottom: 1rem;
+                    margin-top: 2rem;
+                }
+                .course{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 1rem;
+                    border-radius: 0.5rem;
+                    padding: 20px;
+                    background-color: white;
+                    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                    .left{
+                        display: flex;
+                        align-items: center;
+                    }
+                    &:hover{
+                        background-color: #7C83FD;
+                        cursor: pointer;
+                        color: white;
+                    }
+                }
+            }
+            .card-title{
+                text-align: center;
+            }
+            .title{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #7C83FD;;
+                color: white;
+                .bi{
+                    cursor: pointer;
+                }
+            }
+        }    
+    }
+
+}
+
+.loading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+@media screen and (max-width: 900px) {
+    
+    .profile-content{
+        padding: 1rem;
+        .profile-header{
+            display: block;
+            .left-header{
+                margin: 0;
+                margin-bottom: 1rem;
+                .img{
+                    display: flex;
+                    justify-content: center;
+                    background-color: white;
+                    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                    border-radius: 0.5rem;
+                    img{
+                        height: 200px;
+                        border-radius: 50%;
+                    }
+                }
+            }
+            .right-header{
+                width: 100%;
+            }
+        }
+    }
+}

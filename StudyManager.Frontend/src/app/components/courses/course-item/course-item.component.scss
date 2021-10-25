@@ -1,0 +1,207 @@
+.course-content{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    padding: 1rem;
+    .course-left{
+        .course-control, .teacher-info, .teacher-none, .course-status, .homework-island{
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            padding: 20px 50px;
+            background-color: white;
+            margin-right: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+        }
+        .homework-island{
+            text-align: center;
+            &:hover{
+                cursor: pointer;
+                background-color: #7C83FD;
+                color: white;
+            }
+        }
+        .course-control{
+            .modal-content{
+                .btn{
+                    width: 100px;
+                    margin: 0;
+                }
+                .modal-body{
+                    .student-item{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        .info{
+                            display: flex;
+                            align-items: center;
+                        }
+                        &:hover{
+                            background-color: #f1f1f1;
+                        }
+                    }
+                }
+                .modal-footel{
+                    display: flex;
+                    justify-content: end;
+                    align-items: center;
+                }
+
+                img{
+                    border-radius: 50%;
+                    height: 50px;
+                }
+            }
+
+            .btn{
+                margin-bottom: 0.5rem;
+                width: 100%;
+            }
+            .btn-outline-primary{
+                border-color: #7C83FD;
+                &:hover{
+                    background-color: #7C83FD;
+                    color: white;
+                }
+            }
+        }
+        .course-status{
+            text-align: center;
+        }
+        .teacher-none{
+            text-align: center;
+            color: #b8060a;
+        }
+        .teacher-info{
+            text-align: center;
+            &:hover{
+                background-color: #f1f1f1;
+                cursor: pointer;
+            }
+            .text{
+                margin-top: 0.5rem;
+                h4, p{
+                    margin: 0 !important;
+                }
+            }
+            img{
+                height: 150px;
+                border-radius: 50%;
+            }
+        }
+    }
+    .course-right{
+        width: 50%;
+        .island-title{
+            text-align: center;
+        }
+        .title, .info, .students, .add-user{
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            padding: 20px 35px;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            background-color: white;
+        }
+        .title{ 
+            color: white;
+            background-color: #7C83FD;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .left{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                h3{
+                    margin-left: 0.5rem;
+                }
+            }
+            .bi{
+                cursor: pointer;
+            }
+        }
+        .info{
+            h4:hover{
+                background-color: #f1f1f1;
+            }
+        }
+        .students{
+            .student{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 0.5rem;
+                margin-bottom: 0.5rem;
+                border-bottom: solid 1px #EBEFF2;
+                &:hover{
+                    background-color: #f1f1f1;
+                    cursor: pointer;
+                    border-radius: 0.5rem;
+                }
+                .control{
+                    .btn{
+                        margin-left: 0.5rem;
+                    }
+                }
+                .student-info{
+                    display: flex;
+                    align-items: center;
+                    h4{
+                        margin-left: 1rem;
+                    }
+                    img{
+                        height: 50px;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.closed{
+    background-color: #910c15 !important;
+    color: white;
+    &:hover{
+        background-color: rgb(202, 23, 35) !important;
+        color: white;
+        cursor: pointer;
+    }
+}
+.open{
+    background-color: #88bb6b !important;
+    color: white;
+    &:hover{
+        background-color: #B1E693 !important;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+.loading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+@media screen and (max-width: 900px) {
+    .course-content{
+        display: block;
+        .course-control, .teacher-info, .teacher-none, .course-status, .homework-island{
+            margin: 0 !important;
+            margin-bottom: 1rem !important;
+        }
+        .course-right{
+            width: 100%;
+        }
+        .students{
+            padding: 0.5rem !important;
+            .student{
+                .control{
+                    display: flex;
+                }
+            }
+        }
+    }
+}

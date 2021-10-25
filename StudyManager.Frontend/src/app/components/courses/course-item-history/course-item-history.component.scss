@@ -1,0 +1,66 @@
+.courses-content{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    .content{
+        width: 100%;
+        max-width: 70%;
+        background-color: white;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        margin-top: 15px;
+        padding: 10px 50px;
+        border-radius: 0.5rem;
+        .header{
+            display: flex;
+            align-items: center; 
+            a{
+                text-decoration: none;
+                color: black;
+                img{
+                    height: 35px;
+                }
+            }
+        }
+
+        .btn-info{
+            color: white;
+        }
+
+        .visit{
+            display: flex;
+            justify-content: center;
+            border-bottom: solid 1px #EBEFF2;
+            padding: 5px;
+            margin: 15px;
+            .dropdown-menu{
+                padding: 5px;
+                max-height: 300px;
+                height: auto;
+                width: 500px;
+                overflow: auto;
+                h3{
+                    text-align: center;
+                }
+                li{
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .contol{
+            display: flex;
+            justify-content: center;
+            .btn{
+                margin-inline: 5px;
+            }
+        }
+    }
+
+    .loading{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+}
+

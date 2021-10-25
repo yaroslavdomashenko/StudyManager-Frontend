@@ -1,0 +1,41 @@
+<div class="login-content">
+    <div class="content">
+        <h3>Log On</h3>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Name</label>
+                <input type="text" class="form-control" placeholder="Enter your name" name="name" formControlName="name">
+                <small class="form-text text-muted" *ngIf="form.name.invalid && form.name.touched">Name is required</small>
+            </div>
+            <div class="form-group">
+                <label>Surename</label>
+                <input type="text" class="form-control" placeholder="Enter your surename" formControlName="surename">
+                <small class="form-text text-muted" *ngIf="form.surename.invalid && form.surename.touched">Surename is required</small>
+              </div>
+            <div class="form-group">
+                <label>Login</label>
+                <input type="text" class="form-control" placeholder="Enter login" formControlName="login">
+                <small class="form-text text-muted" *ngIf="form.login.errors?.required && form.login.touched">Login is required</small>
+                <small class="form-text text-muted" *ngIf="form.login.errors?.minlength && form.login.touched">Login must have at least 5 characters</small>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                <small class="form-text text-muted" *ngIf="form.password.errors?.required && form.password.touched">Password is required</small>
+                <small class="form-text text-muted" *ngIf="form.password.errors?.minlength && form.password.touched">Password must have at least 5 characters</small>
+            </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirmPassword">
+                <small class="form-text text-muted" *ngIf="form.confirmPassword.invalid && form.confirmPassword.touched">Confirm password</small>
+                <small class="form-text text-muted" *ngIf="(form.password.value != form.confirmPassword.value) && form.confirmPassword.touched"><br>Password doesn't match</small>
+              </div>
+            <div class="logbutton">
+                <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid" [hidden]="loading">Log in</button>
+                <div class="spinner-border text-info" role="status" [hidden]="!loading"></div>
+            </div>
+        </form>
+        <a routerLink="/login">Already have an account?</a>
+        <div class="form-text text-muted"><br>{{errorText}}</div>
+    </div>
+</div>

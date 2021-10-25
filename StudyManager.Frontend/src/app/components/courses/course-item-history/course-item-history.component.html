@@ -1,0 +1,42 @@
+<div class="courses-content">
+    <div class="content">
+
+        <div *ngIf="loading" class="loading loading-icon text-info" >
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status"></div>
+            </div>
+        </div>
+        
+        <div *ngIf="!loading" class="header">
+            <a [routerLink]="['/courses', courseId]">
+                <img src="assets/images/back.png" alt="icon">
+            </a>
+        </div>
+        
+        <div class="visits" *ngIf="!loading">
+            <div class="visit" *ngFor="let visit of visitsModel">
+                <div class="btn-group dropright">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Date: {{ConvertTime(visit.dateCreated)}}
+                    </button>
+                    <div class="dropdown-menu">
+                        <h3>Students</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item"
+                                *ngFor="let student of visit.visitors"
+                                [routerLink]="['/users', student.login]"
+                            >{{student.name}} {{student.surename}} @{{student.login}}</li>
+                          </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="!loading" class="contol">
+            <button [hidden]="page == 1" routerLink="." [queryParams]="{'p': page - 1}" type="button" class="btn btn-dark">Previous</button>
+            <button [hidden]="length < 15" routerLink="." [queryParams]="{'p': page + 1}" type="button" class="btn btn-dark">Next</button>
+        </div>
+
+    </div>
+</div>
+

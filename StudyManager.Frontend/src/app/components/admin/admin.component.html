@@ -1,0 +1,56 @@
+<div class="admin-content">
+
+    <!-- Role changer -->
+    <div class="admin-group">
+      <div class="content">
+        <h3>Change user's role</h3>
+        <form (ngSubmit)="ChangeRoleTo()" [formGroup]="changeRoleForm">
+            <div class="form-group">
+              <label for="loginForm">User's login</label>
+              <input type="text" class="form-control" id="loginForm" placeholder="Login" formControlName="login">
+              <small class="form-text error" *ngIf="changeRoleForm.controls.login.invalid && changeRoleForm.controls.login.touched">Login is required</small>
+            </div>
+            <div class="form-group">
+              <label>Role</label>
+              <select class="form-control"formControlName="role">
+                <option [value]="0">Student</option>
+                <option [value]="1">Teacher</option>
+                <option [value]="2">Admin</option>
+              </select>
+            </div>
+            <div class="btn-control">
+              <button type="submit" class="btn btn-primary" [disabled]="!changeRoleForm.valid">Change role</button>
+            </div>
+          </form>
+      </div>
+    </div>  
+
+    <!-- Course creator -->
+    <div class="admin-group">
+      <div class="content">
+        <h3>Create new course</h3>
+        <form (ngSubmit)="CreateCourse()" [formGroup]="createCourseForm">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" id="title" placeholder="Title" formControlName="title">
+              <small class="form-text error" *ngIf="createCourseForm.controls.title.invalid && createCourseForm.controls.title.touched">Title is required</small>
+            </div>
+            <div class="form-group">
+              <label for="price">Price $</label>
+              <input type="number" min="0" class="form-control" id="price" placeholder="Minimum is 0.1$" formControlName="price">
+              <small class="form-text error" *ngIf="createCourseForm.controls.price.invalid && createCourseForm.controls.price.touched">Wrong input</small>
+            </div>
+            <div class="btn-control">
+              <button type="submit" class="btn btn-primary" [disabled]="!createCourseForm.valid">Create course</button>
+            </div>
+          </form>
+      </div>
+    </div>
+
+</div>
+
+<div *ngIf="loading" class="loading loading-icon text-info" >
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status"></div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="menu">
+    <div class="menu-content">
+        <div class="logo">
+            <a routerLink="">Study Manager</a>
+        </div>
+        <div *ngIf="loading"  class="d-flex justify-content-center loading">
+            <div class="spinner-border text-info" style="width: 3rem; height: 3rem;" role="status"></div>
+        </div>
+        
+        <div class="profile" *ngIf="isAuth && !loading">
+            <div class="profile-left">
+                <app-profile
+                    Name = "{{userModel?.name}} {{userModel?.surename}}"
+                    Login = "{{userModel?.login}}"
+                    Avatar = {{userModel?.avatar}}
+                ></app-profile>
+            </div>
+            <div class="prifile-right">
+                <app-notifications></app-notifications>
+            </div>
+        </div>
+        
+
+        <div class="buttons" *ngIf="!loading">
+            <div *ngFor="let button of buttons">
+                <app-menu-button
+                    *ngIf="Access(button)"
+                    Text={{button.text}}
+                    Link={{button.link}}
+                ></app-menu-button>
+            </div>
+        </div>
+        
+    </div>
+</div>

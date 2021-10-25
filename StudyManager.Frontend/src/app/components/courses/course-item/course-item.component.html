@@ -1,0 +1,194 @@
+<div *ngIf="loading" class="loading loading-icon text-info" >
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status"></div>
+    </div>
+</div>
+
+<div *ngIf="!loading" class="course-content">
+    
+    <div class="course-left">
+
+        <div class="course-status" 
+                [ngClass]="courseModel.isActive ? 'open':'closed'"
+                (click)="ChangeActive()"
+            >
+            <div *ngIf="courseModel?.isActive">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-unlock-fill" viewBox="0 0 16 16">
+                    <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z"/>
+                </svg>
+            </div>
+            <div *ngIf="!courseModel?.isActive">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                  </svg>
+            </div>
+        </div>
+
+        <div class="teacher-none" *ngIf="courseModel?.user == undefined">
+            <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+            </svg>
+        </div>
+
+        <div class="teacher-info" *ngIf="courseModel?.user != undefined" [routerLink]="['/users', courseModel.user.login]">
+            <h4>Teacher</h4>
+            <div class="img">
+                <img *ngIf="courseModel.user?.avatar != null" src="{{serverUrl + courseModel.user?.avatar}}">
+                <img *ngIf="courseModel.user?.avatar == null" src="{{serverUrl}}/files/avatar.png">
+            </div>
+            <div class="text">
+                <h4>{{courseModel.user?.name}} {{courseModel.user?.surename}}</h4>
+                <p>@{{courseModel.user?.login}}</p>
+            </div>
+        </div>
+
+        <div class="homework-island" [routerLink]="['/homework', courseModel.id]">
+            <h3>Homework</h3>
+        </div>
+
+        <div class="course-control" *ngIf="userModel?.role == AdminRole || (courseModel?.user?.id == userModel?.id)">
+            <div class="button">
+                <button type="button" class="btn"
+                    (click)="AddUserPanel()"
+                    [ngClass]="isAddUser ? 'btn-outline-danger' : 'btn-outline-primary'"
+                    [disabled]="!courseModel?.isActive"
+                >{{isAddUser ? 'Close' : 'Add to course'}}</button> 
+            </div>
+            
+            <!-- Visit creation -->
+            <div class="button">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#CreateVisitModal">Create new visit</button>
+            </div>
+            <div class="modal fade" id="CreateVisitModal" tabindex="-1" role="dialog" aria-labelledby="CreateVisitModal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenterTitle">New visit form</h5>
+                    </div>
+                    <div class="modal-body">    
+                        <div *ngFor="let student of courseModel?.students" class="student-item">
+                            <div class="info">
+                                <img *ngIf="student.avatar != null" src="{{serverUrl}}{{student.avatar}}">
+                                <img *ngIf="student.avatar == null" src="{{serverUrl}}/files/avatar.png">
+                                <h3>{{student.name}} {{student.surename}}</h3>
+                            </div>
+                            <button type="button" 
+                                class="btn"
+                                [ngClass]="InVisitList(student.id) ? 'btn-danger' : 'btn-success' "
+                                (click)="InVisitList(student.id) ? ManageVisitList(student.id, false) : ManageVisitList(student.id) ">
+                                {{ InVisitList(student.id) ? "-" : "+"}}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-success" data-dismiss="modal" (click)="CreateNewVisit()">Create</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Edit course -->
+            <div class="button">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#EditCourseInfo">Edit information</button>
+            </div>
+            <div class="modal fade" id="EditCourseInfo" tabindex="-1" role="dialog" aria-labelledby="CreateVisitModal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenterTitle">Edit course information</h5>
+                    </div>
+                    <div class="modal-body">    
+                        <form [formGroup]="ChangeInfoForm">
+                            <div class="form-group">
+                              <label for="title">Title</label>
+                              <input type="text" class="form-control" id="title" placeholder="Title" formControlName="title">
+                            </div>
+                            <div class="form-group">
+                              <label for="price">Price $</label>
+                              <input type="number" min="0" class="form-control" id="price" placeholder="Minimum is 0.1$" formControlName="price">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-success" data-dismiss="modal" (click)="EditInfo()">Save</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="button">
+                <button routerLink="history" class="btn btn-outline-primary">View visit history</button>
+            </div>
+            <div class="button">
+                <button 
+                    *ngIf="courseModel?.user != null && userModel?.role == 2 && courseModel.user.id != undefined" 
+                    type="button" class="btn btn-outline-danger" 
+                    (click)="RemoveTeacher(courseModel.id)">
+                    Remove teacher
+                </button>
+            </div>       
+            
+        </div>
+
+    </div>
+
+    <div class="course-right">
+        <div class="title">
+            <div class="left">
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-journal-bookmark" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 8V1h1v6.117L8.743 6.07a.5.5 0 0 1 .514 0L11 7.117V1h1v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8z"/>
+                    <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                    <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                </svg>
+                <h3>{{courseModel?.title}}</h3>
+            </div>
+            
+            <svg [routerLink]="['/courses']" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
+            </svg>
+        </div>
+
+        <div class="info">
+            <div class="island-title">
+                <h3>Information</h3>
+            </div>
+            <h4>Title: {{courseModel?.title}}</h4>
+            <h4>Created: {{date}}</h4>
+            <h4>Price: {{courseModel?.price}}$/hour</h4>
+        </div>
+
+        <div class="students">
+            <div class="island-title">
+                <h3>Students</h3>
+            </div>
+
+            <div class="student" *ngFor="let student of courseModel?.students">
+                <div class="student-info" [routerLink]="['/users', student.login]">
+                    <div class="img">
+                        <img *ngIf="student?.avatar != null" src="{{serverUrl + student?.avatar}}">
+                        <img *ngIf="student?.avatar == null" src="{{serverUrl}}/files/avatar.png">
+                    </div>
+                    <h4>{{student.name + " " + student.surename}}</h4>
+                </div>
+                <div class="control" *ngIf="userModel?.role == AdminRole || (courseModel?.user?.id == userModel?.id)">
+                    <button type="button" class="btn btn-outline-success" [routerLink]="['user-visits', student.login]">Visits</button>
+                    <button type="button" class="btn btn-outline-danger" [disabled]="!courseModel?.isActive" (click)="Remove(student.id)">Remove</button>
+                </div> 
+            </div>
+        </div>
+
+        <div class="add-user" *ngIf="isAddUser">
+            <app-add-user-to-course
+                [courseId]="courseId"
+                [userRole]="userModel?.role"
+                (addUser)="addUser($event)"
+        ></app-add-user-to-course>
+        </div>
+        
+
+    </div>
+</div>
+
+<router-outlet></router-outlet>

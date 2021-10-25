@@ -1,0 +1,36 @@
+<div class="notify">
+    <div class="image-button" (click)="ToggleButton()">
+        <img src="assets/images/bell.png" alt="icon">
+        <span *ngIf="GetUnReadCount() > 0">{{GetUnReadCount()}}</span>
+    </div>   
+    <div class="notifications" *ngIf="toggle">
+        <div class="header">
+            <img src="assets/images/letter.png" alt="">
+            <h4>Notifications</h4>
+            <img class="close" src="assets/images/close.png" alt="" (click)="ToggleButton()">
+        </div>
+
+        <div class="notify" *ngFor="let notif of notifications">
+            <div class="left">
+                <div class="text">
+                    {{notif.text}}
+                </div>
+                <div class="date">
+                    <p>{{ConvertTime(notif.dateCreated)}}</p>
+                </div>
+            </div>
+            <div class="right" *ngIf="!notif.isRead" (click)="Read(notif.id)">
+                <img  src="assets/images/check.png" alt="">
+            </div>
+        </div>
+
+        <div class="footer">
+            <p *ngIf="!loading" (click)="LoadMore()">Load more</p>
+
+            <div *ngIf="loading" class="d-flex justify-content-center">
+                <div class="spinner-border text-info" role="status"></div>
+            </div>
+        </div>
+
+    </div>
+</div>

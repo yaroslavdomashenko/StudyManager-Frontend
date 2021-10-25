@@ -1,0 +1,68 @@
+<div class="settings-content">
+    <div class="left-content">
+
+        <div class="option-group">
+            <form [formGroup]="changePasswordForm" (ngSubmit)="ChangePassword()">
+                <h2>Update password</h2>
+                <div class="form-group">
+                  <label>Old Password</label>
+                  <input type="password" class="form-control" placeholder="Enter old password" formControlName="password">
+                  <small class="form-text text-error" *ngIf="changePassForm.password.invalid && changePassForm.password.touched">Password is required</small>
+                  <small class="form-text text-success">{{passSuccessText}}</small>
+                  <small class="form-text text-error">{{passErrorText}}</small>
+                </div>
+                <div class="form-group">
+                  <label>New Password</label>
+                  <input type="password" class="form-control" placeholder="New Password" formControlName="newPassword">
+                  <small class="form-text text-error" *ngIf="changePassForm.newPassword.errors?.required && changePassForm.newPassword.touched">New password is required</small>
+                <small class="form-text text-error" *ngIf="changePassForm.newPassword.errors?.minlength && changePassForm.newPassword.touched">Password must have at least 5 characters</small>
+                </div>
+                <div class="form-group">
+                    <label>Conform Password</label>
+                    <input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirmNewPassowod">
+                    <small class="form-text text-error" *ngIf="changePassForm.confirmNewPassowod.invalid && changePassForm.confirmNewPassowod.touched">Confirm password<br></small>
+                    <small class="form-text text-error" *ngIf="(changePassForm.newPassword.value != changePassForm.confirmNewPassowod.value) && changePassForm.confirmNewPassowod.touched">Password doesn't match</small>  
+                </div>
+                <div class="submit-button">
+                    <button type="submit" class="btn btn-primary" *ngIf="!loading" [disabled]="!changePasswordForm.valid">Update password</button>
+                    <div class="spinner-border text-info" role="status" *ngIf="loading"></div>
+                </div> 
+              </form>
+        </div>
+
+    </div>
+
+    <div class="right-content">
+        <div class="option-group">
+            <form [formGroup]="changeNameForm" (ngSubmit)="ChangeName()">
+                <h2>Update name</h2>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" placeholder="Enter name" formControlName="name">
+                </div>
+                <div class="form-group">
+                    <label>Surename</label>
+                    <input type="text" class="form-control" placeholder="Enter surename" formControlName="surename">
+                </div>
+                <div class="submit-button">
+                    <button type="submit" class="btn btn-primary" *ngIf="!loading">Update name</button>
+                    <div class="spinner-border text-info" role="status" *ngIf="loading"></div>
+                </div> 
+              </form>
+        </div>
+        
+        <div class="option-group">
+            <form (ngSubmit)="UploadAvatar()">
+                <h2>Update avatar</h2>
+                <div class="form-group">
+                    <input type="file" #file placeholder="Choose file" (change)="onFileSelected(file.files)">
+                </div>
+                <div class="submit-button">
+                    <button type="submit" class="btn btn-primary" *ngIf="!loading">Update avatar</button>
+                    <div class="spinner-border text-info" role="status" *ngIf="loading"></div>
+                </div> 
+              </form>
+        </div>
+    
+    </div>
+</div>

@@ -1,0 +1,20 @@
+.button-content{
+    display: flex;
+    justify-content: center;
+    width: 208px;
+    margin: auto;
+    padding: 5px 0px;
+    a{
+        color: #334D6E;
+        text-decoration: none;
+        font-size: 15px;
+        &:hover{
+            color: white;
+        }
+    }
+
+    .btn{
+        width: 100% !important;
+    }
+}
+

@@ -1,0 +1,21 @@
+.home-content{
+    width: 100%;
+    height: 100vh;
+    .img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        img{
+            max-width: 45%;
+            border-radius: 2rem;
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .home-content {
+        display: none;
+    }
+}

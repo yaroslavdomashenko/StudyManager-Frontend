@@ -1,0 +1,43 @@
+<div *ngIf="loading" class="loading d-flex justify-content-center">
+    <div class="spinner-border text-info" role="status"></div>
+</div>
+
+<div *ngIf="!loading" class="comments-box">
+    <div class="comments">
+        <h4>Comments</h4>
+        <div class="comment" *ngFor="let comment of comments">
+            <div class="left">
+                <div class="img" [routerLink]="['/users', comment.user.login]">
+                    <img *ngIf="comment.user.avatar == null" src="{{serverUrl}}/files/avatar.png">
+                    <img *ngIf="comment.user.avatar != null" src="{{serverUrl + comment.user.avatar}}" alt="avatar">
+                </div>
+                <div class="info">
+                    <div class="head">
+                        <p class="username">{{comment.user.name}} {{comment.user.surename}}</p>
+                        <p class="date">{{ConvertTime(comment.dateCreated)}}</p>
+                    </div>
+                    <div class="body">
+                        <p>{{comment.text}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group dropleft" *ngIf="userRole == 2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical dropdown-toggle" data-toggle="dropdown" viewBox="0 0 16 16">
+                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                </svg>
+                <div class="dropdown-menu">
+                    <button type="button" class="dropdown-item" (click)="Remove(comment.id)">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form class="comment-form" [formGroup]="sendForm" (ngSubmit)="SendComment()">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Add new comment..." formControlName="text">
+          <button type="submit" class="btn btn-success">Send</button>
+        </div>
+    </form>
+    
+</div>
