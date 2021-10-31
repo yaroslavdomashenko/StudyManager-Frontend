@@ -1,10 +1,16 @@
-<div class="chat-content">
+<div *ngIf="loading" class="loading loading-icon text-info" >
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status"></div>
+    </div>
+</div>
+
+<div class="chat-content" *ngIf="!loading">
     <div class="header">
         <div class="left">
             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-chat-left-text-fill" viewBox="0 0 16 16">
                 <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
               </svg>
-            <h3>Title</h3>
+            <h3>{{course?.title}}</h3>
         </div>
         
         <svg [routerLink]="['/courses', courseId]" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
@@ -13,45 +19,35 @@
     </div>
     <div class="chat-body">
 
-        <div class="chat">
+        <div class="chat" #chat>
 
-            <div class="" *ngFor="let i of [1,4,5,4,5,34,5,345,3,45,34,53,4]">
-                <div class="message received">
-                    <div class="img">
-                        <img src="http://localhost:5000/files/ravenqod2021_10_13_18_02.jpg">
-                    </div>
-                    <div class="message-body">
-                        <p class="username">Yaroslav Domashenko</p>
-                        <p class="message-text">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique, sunt.
-                        </p>
-                        <p class="time">31.10.2021 12:40</p>
-                    </div>
+            <div class="empty" *ngIf="messages.length == 0">
+                <h3>Write the first message to this chat!</h3>
+            </div> 
+
+            <div class="message" *ngFor="let message of messages" [ngClass]="message.user?.id == user?.id ? 'sent' : 'received'">
+                <div class="img" [routerLink]="['/users', message.user.login]">
+                    <img *ngIf="message.user.avatar == null" src="{{apiUrl}}/files/avatar.png">
+                    <img *ngIf="message.user.avatar != null" src="{{apiUrl + message.user.avatar}}" alt="avatar">
                 </div>
-    
-                <div class="message sent">
-                    <div class="img">
-                        <img src="http://localhost:5000/files/avatar.png">
-                    </div>
-                    <div class="message-body">
-                        <p class="username">Yaroslav Domashenko</p>
-                        <p class="message-text">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique, sunt.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel voluptas in, consectetur recusandae voluptates quibusdam nostrum rem, quos aperiam odio corrupti saepe hic veniam quaerat ipsa accusantium sequi harum maxime.
-                        </p>
-                        <p class="time">31.10.2021 12:40</p>
-                    </div>
+                <div class="message-body">
+                    <p class="username">{{message.user.name + " " + message.user.surename}}</p>
+                    <p class="message-text">
+                        {{message.text}}
+                    </p>
+                    <p class="time">{{ConvertTime(message.dateCreated)}}</p>
                 </div>
             </div>
-
+            
         </div>
         
-        <form class="comment-form">
+        <form class="comment-form" [formGroup]="textForm" (ngSubmit)="OnSubmit()">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Add new comment..." formControlName="text">
+              <input type="text" class="form-control" placeholder="Message" formControlName="text">
               <button type="submit" class="btn btn-success">Send</button>
             </div>
         </form>
 
     </div>
 </div>
+
