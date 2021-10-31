@@ -4,7 +4,7 @@
     height: 100%;
     padding: 1rem;
     .course-left{
-        .course-control, .teacher-info, .teacher-none, .course-status, .homework-island{
+        .course-control, .teacher-info, .teacher-none, .course-status, .button-island{
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
             padding: 20px 50px;
             background-color: white;
@@ -12,7 +12,8 @@
             margin-bottom: 1.5rem;
             border-radius: 0.5rem;
         }
-        .homework-island{
+        .button-island{
+            padding: 15px;
             text-align: center;
             &:hover{
                 cursor: pointer;
@@ -188,7 +189,7 @@
 @media screen and (max-width: 900px) {
     .course-content{
         display: block;
-        .course-control, .teacher-info, .teacher-none, .course-status, .homework-island{
+        .course-control, .teacher-info, .teacher-none, .course-status, .button-island{
             margin: 0 !important;
             margin-bottom: 1rem !important;
         }

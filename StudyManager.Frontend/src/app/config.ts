@@ -1,3 +1,3 @@
 export const endpointConfig = {
-    apiEndpoint: 'https://localhost:44351'
+    apiEndpoint: 'https://localhost:5001'
 };

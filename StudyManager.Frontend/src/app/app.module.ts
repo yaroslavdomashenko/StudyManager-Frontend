@@ -30,6 +30,7 @@ import { TaskComponent } from './components/courses/homework/task/task.component
 import { HomeworkParentComponent } from './components/courses/homework/homework-parent/homework-parent.component';
 import { CreateTaskComponent } from './components/courses/homework/create-task/create-task.component';
 import { CommentsComponent } from './components/courses/homework/comments/comments.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 const appRoutes: Routes= [
   {path: '', component:HomeComponent},
@@ -40,11 +41,13 @@ const appRoutes: Routes= [
   {path: 'users', component:UsersComponent},
   {path: 'users/:login', component: UserComponent },
   {path: 'courses', component: CoursesComponent},
+  {path: 'courses/:id/history', component: CourseItemHistoryComponent},
+  {path: 'admin-panel', component:AdminComponent},
+  {path: "chat/:id", component:ChatComponent},
+
   {path: 'courses/:id', component: CourseItemComponent, children: [
     {path: 'user-visits/:login', component:UserVisitsComponent}
   ]},
-  {path: 'courses/:id/history', component: CourseItemHistoryComponent},
-  {path: 'admin-panel', component:AdminComponent},
 
   {path: 'homework/:id', component: HomeworkParentComponent, children: [
     {path: '', component: HomeworkComponent},
@@ -76,7 +79,8 @@ const appRoutes: Routes= [
     TaskComponent,
     HomeworkParentComponent,
     CreateTaskComponent,
-    CommentsComponent
+    CommentsComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
