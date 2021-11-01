@@ -9,7 +9,7 @@
     <div class="course-left">
 
         <div class="course-status" 
-                [ngClass]="courseModel.isActive ? 'open':'closed'"
+                [ngClass]="courseModel?.isActive ? 'open':'closed'"
                 (click)="ChangeActive()"
             >
             <div *ngIf="courseModel?.isActive">
@@ -42,10 +42,10 @@
             </div>
         </div>
 
-        <div class="button-island" [routerLink]="['/homework', courseModel.id]">
+        <div class="button-island" [routerLink]="['/homework', courseModel?.id]">
             <h3>Homework</h3>
         </div>
-        <div class="button-island" [routerLink]="['/chat', courseModel.id]">
+        <div class="button-island" [routerLink]="['/chat', courseModel?.id]">
             <h3>Chat</h3>
         </div>
 
@@ -126,7 +126,7 @@
             </div>
             <div class="button">
                 <button 
-                    *ngIf="courseModel?.user != null && userModel?.role == 2 && courseModel.user.id != undefined" 
+                    *ngIf="courseModel?.user != null && userModel?.role == 2 && courseModel.user?.id != undefined" 
                     type="button" class="btn btn-outline-danger" 
                     (click)="RemoveTeacher(courseModel.id)">
                     Remove teacher

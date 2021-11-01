@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import * as signalR from "@microsoft/signalr";
 import { endpointConfig } from 'src/app/config';
@@ -27,6 +27,7 @@ export class ChatComponent implements OnInit {
   public messages:messageModel[] = [];
   public course:courseModel;
   public user:userModel;
+  public chatOnline:number = 0;
 
   textForm = new FormGroup({
     text: new FormControl(null, Validators.required)
@@ -36,6 +37,7 @@ export class ChatComponent implements OnInit {
     private activateRoute:ActivatedRoute, 
     private chatService:ChatService,
     private userService:UserService,
+    private router:Router,
     private courseService:CourseService)
   {
     this.subscription = activateRoute.params.subscribe(params=>{
@@ -59,6 +61,10 @@ export class ChatComponent implements OnInit {
       this.ScrollToTheBottom();
     });
 
+    this.hubConnection.on("GroupInfo", data => {
+      this.chatOnline = data;
+    });
+
   }
 
   ngOnInit(): void{
@@ -72,7 +78,8 @@ export class ChatComponent implements OnInit {
   public GetMe(){
     this.userService.GetMe().subscribe(data => {
       this.user = data;
-    });
+    }, err => this.router.navigate(['/'])
+    );
   }
 
   public ScrollToTheBottom(){
